@@ -1,11 +1,17 @@
+import 'package:book_review/firebase_options.dart';
 import 'package:book_review/src/app.dart';
 import 'package:book_review/src/common/interceptor/custom_interceptor.dart';
+import 'package:book_review/src/common/model/naver_book_search_option.dart';
 import 'package:book_review/src/common/repository/naver_api_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  // firebase 를 사용하는 경우 초기화를 시켜줘야함
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Dio dio = Dio(BaseOptions(baseUrl: 'https://openapi.naver.com/'));
   dio.interceptors.add(CustomInterceptor());
 
@@ -26,8 +32,16 @@ class MyApp extends StatelessWidget {
         //     providers: [], child: App()
         // )
         child: Builder(builder: (context) => FutureBuilder(
-            future: context.read<NaverBookRepository>().searchBooks(),
+            // future: context.read<NaverBookRepository>().searchBooksVer1(), -- ver1
+            // future: context.read<NaverBookRepository>().searchBooks(NaverBookSearchOption('플러터', 1, 10, NaverBookSearchType.date)),
+            // future: context.read<NaverBookRepository>().searchBooksVer2(
+            //     const NaverBookSearchOption.init(query: '플러터')),
+            future: context.read<NaverBookRepository>().searchBooks(
+                const NaverBookSearchOption.init(query: '플러터')),
             builder: (context, snapshot) {
+              if(snapshot.hasData) {
+                return MaterialApp(home: Center(child: Text('${snapshot.data?.items?.length ?? 0}'),));
+              }
               return Container();
             }
 
