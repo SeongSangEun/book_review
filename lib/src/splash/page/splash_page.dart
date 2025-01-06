@@ -1,3 +1,4 @@
+import 'package:book_review/src/common/component/app_font.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,25 +25,19 @@ class SplashPage extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
+                    AppFont(
                       '도서 리뷰 앱으로 \n좋아하는 책을 찾아보세요.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
                     ),
                     SizedBox(
                       height: 40,
                     ),
-                    Text(
-                      '데이터 로드중 입니다.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff878787)),
-                    ),
+                    AppFont('데이터 로드중 입니다.',
+                        textAlign: TextAlign.center,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff878787)),
                     SizedBox(
                       height: 10,
                     ),
