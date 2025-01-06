@@ -1,5 +1,6 @@
 import 'package:book_review/src/imsi/detail.dart';
 import 'package:book_review/src/imsi/home.dart';
+import 'package:book_review/src/splash/page/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,16 +21,13 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    router = GoRouter(routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const Home(),
-      ),
-      GoRoute(
-        path: '/detail',
-        builder: (context, state) => const Detail(),
-      ),
-    ], initialLocation: '/',);
+    router = GoRouter(
+      initialLocation: '/', 
+      routes: [
+       GoRoute(path: '/', builder: (context, state) => SplashPage(),)
+    ],
+      
+    );
   }
 
   @override

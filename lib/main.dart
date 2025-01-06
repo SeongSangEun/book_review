@@ -28,26 +28,7 @@ class MyApp extends StatelessWidget {
         providers: [
           RepositoryProvider(create: (context) => NaverBookRepository(dio)),
         ],
-        // child: MultiBlocProvider(
-        //     providers: [], child: App()
-        // )
-        child: Builder(builder: (context) => FutureBuilder(
-            // future: context.read<NaverBookRepository>().searchBooksVer1(), -- ver1
-            // future: context.read<NaverBookRepository>().searchBooks(NaverBookSearchOption('플러터', 1, 10, NaverBookSearchType.date)),
-            // future: context.read<NaverBookRepository>().searchBooksVer2(
-            //     const NaverBookSearchOption.init(query: '플러터')),
-            future: context.read<NaverBookRepository>().searchBooks(
-                const NaverBookSearchOption.init(query: '플러터')),
-            builder: (context, snapshot) {
-              if(snapshot.hasData) {
-                return MaterialApp(home: Center(child: Text('${snapshot.data?.items?.length ?? 0}'),));
-              }
-              return Container();
-            }
-
-        )),
-        
-
+        child: const App(),
     );
   }
 }
